@@ -1,0 +1,351 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FCF98C3F-251B-9C07-B352-D1C895BEA6AE" name="shapes">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:27:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<ordsAlias>table_3</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="users_id" id="E0FA8237-098F-9802-6C18-D825A4777D16">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:28:20 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 CHAR</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A3C396D7-C562-8927-459B-A40E0C5F319D" referredColumn="7E14A163-805B-4980-7BC0-CB8765FDEA3C"/>
+</associations>
+</Column>
+<Column name="size_neck" id="9A3F262C-AB7E-DFD1-1830-DAB43C50F74C">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_shoulder" id="0BCC2717-A0E0-0EE5-3541-9492FB3452BA">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_chest_relaxed" id="8B436A5D-7243-C421-B3F3-25CDBE8EAC6F">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_chest_inspired " id="60DE6DCD-E9BA-3C89-A6D2-B985A1CDB2F7">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name=" waist" id="17494970-624A-EC33-B153-C3ECEC7133FC">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="abdomen" id="8B3D9C4D-5F98-B1CD-1D8C-9DAC4E1079EE">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:09 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name=" hip" id="147DD140-82C3-E017-F019-49766616C0A1">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:36:33 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_arm_left_relaxed" id="305D9209-AD8D-D33A-0EF7-AB466C9B105C">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:37:37 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_arm_left_contracted" id="506ECA79-821C-CDE2-7E83-0A33DA071CC8">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:37:37 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_arm_right_relaxed" id="CF44824C-6CB4-6FAF-D4F0-99C47B86BBC6">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:38:05 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_arm_right_contracted" id="11CCB48E-E332-7209-18F5-12AFFA3B9176">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:38:05 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_forearm_left" id="BB014437-F33D-0E14-F8F4-D89CB70D0E3A">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:38:51 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_forearm_right" id="A903A90C-5FF6-1BD3-6C5E-5DAF6AAF7819">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:38:51 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_thigh_left" id="2365DFDE-1E59-F8C4-8ADD-1856D7A35E94">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:39:25 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_thigh_right" id="EB1436F6-116D-98C0-FE05-742C36BF4C55">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:39:37 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_calf_lefth" id="DDEA66AF-012A-6C14-681E-87CF51BB10FD">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:40:13 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="size_calf_right" id="D8E9B7BA-87A0-8699-C0C0-7B0E955D5593">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:40:13 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_subscapularis" id="82DD0018-2BED-81C5-C5F5-F4F60547847C">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_triceps" id="039AAC1F-81DB-F84C-CF74-9BAC77D066E5">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_biceps" id="CB615985-A5E9-2DBA-7514-C06F00B310A1">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_chest" id="E551CCF1-E5E6-6512-25FF-7172772DC3E3">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_mid_axillary" id="71A729D2-AEE2-87FC-E4A6-36480E5C827B">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_suprailiaca" id="26CD4881-FA98-9CEE-4253-D16184102731">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_abdominal" id="6460B1B6-A9EA-93A5-FE83-91E94B3B41B8">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_medial_thigh" id="DD500812-33BA-DF4D-1218-0ACB05711593">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fat_medial_calf" id="856A29C4-9DF5-E4E7-66B0-1255DEDF3DC5">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:45:44 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT021</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="94DF9262-ECBB-9DB3-8F95-F34BE98F9FC4" name="shapes_users_FK">
+<createdBy>Lucas</createdBy>
+<createdTime>2024-08-15 16:28:20 UTC</createdTime>
+<ownerDesignName>modeloes</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E0FA8237-098F-9802-6C18-D825A4777D16"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
