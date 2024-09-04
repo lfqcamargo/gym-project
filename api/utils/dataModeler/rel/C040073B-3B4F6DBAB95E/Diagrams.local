@@ -1,4 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<oracle.dbtools.crest.model.design.relational.RelationalDesign>
-   <object objectType="main_view" objectID="4A764C5E-BF50-82E2-C205-0647F950692B" name="Gym Web" visible="true"/>
-</oracle.dbtools.crest.model.design.relational.RelationalDesign>
