@@ -55,5 +55,8 @@
     "unplugin-swc": "^1.5.1",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }

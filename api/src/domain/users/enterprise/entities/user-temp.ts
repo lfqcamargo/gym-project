@@ -1,3 +1,7 @@
+import { randomUUID } from 'node:crypto'
+
+import dayjs from 'dayjs'
+
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
@@ -8,6 +12,7 @@ export interface UserTempProps {
   name: string
   password: string
   createdAt: Date
+  token: string
   tokenExpiration: Date
 }
 
@@ -32,25 +37,41 @@ export class UserTemp extends Entity<UserTempProps> {
     return this.props.createdAt
   }
 
-  set name(name: string) {
-    this.props.name = name
+  get token() {
+    return this.props.token
   }
 
-  set password(password: string) {
-    this.props.password = password
+  get tokenExpiration() {
+    return this.props.tokenExpiration
   }
 
-  static create(props: Optional<UserTempProps, 'createdAt' | 'tokenExpiration'>,
-    id?: UniqueEntityId) {
+  static create(
+    props: Optional<UserTempProps, 'createdAt' | 'token' | 'tokenExpiration'>,
+    id?: UniqueEntityId,
+  ) {
     const userTemp = new UserTemp(
       {
         ...props,
         createdAt: new Date(),
-        tokenExpiration: new Date(),
+        token: randomUUID(),
+        tokenExpiration: dayjs().add(1, 'day').toDate(),
       },
       id,
     )
 
     return userTemp
+  }
+
+  public updateDetails(cpf: string, name: string, password: string) {
+    this.props.cpf = cpf
+    this.props.name = name
+    this.props.password = password
+    this.touch()
+  }
+
+  private touch() {
+    this.props.token = randomUUID()
+    this.props.tokenExpiration = dayjs().add(1, 'day').toDate()
+    this.props.createdAt = new Date()
   }
 }

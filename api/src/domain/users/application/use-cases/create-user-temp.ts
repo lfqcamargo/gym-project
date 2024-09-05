@@ -1,11 +1,11 @@
 import { Either, left, right } from '@/core/either'
-import { UserTemp } from '@/domain/users/enterprise/entities/userTemp'
+import { UserTemp } from '@/domain/users/enterprise/entities/user-temp'
 
 import { HashGenerator } from '../cryptography/hash-generator'
 import { UserRepository } from '../repositories/user-repository'
+import { UserTempRepository } from '../repositories/user-temp-repository'
 import { AlreadyExistsCpfError } from './errors/already-exists-cpf-error'
 import { AlreadyExistsEmailError } from './errors/already-exists-email-error'
-import { UserTempRepository } from '../repositories/userTemp-repository'
 
 interface CreateUserTempUseCaseRequest {
   cpf: string
@@ -24,7 +24,7 @@ export class CreateUserTempUseCase {
     private userTempRepository: UserTempRepository,
     private userRepository: UserRepository,
     private hashGenerator: HashGenerator,
-  ) { }
+  ) {}
 
   async execute({
     cpf,
@@ -32,9 +32,9 @@ export class CreateUserTempUseCase {
     name,
     password,
   }: CreateUserTempUseCaseRequest): Promise<CreateUserTempUseCaseResponse> {
-    const alreadyEmail = await this.userRepository.findByEmail(email)
+    const alreadyEmailUser = await this.userRepository.findByEmail(email)
 
-    if (alreadyEmail) {
+    if (alreadyEmailUser) {
       return left(new AlreadyExistsEmailError())
     }
 
@@ -46,14 +46,24 @@ export class CreateUserTempUseCase {
 
     const hashedPassword = await this.hashGenerator.hash(password)
 
-    const userTemp = UserTemp.create({
+    const userTemp = await this.userTempRepository.findByEmail(email)
+
+    if (userTemp) {
+      userTemp.updateDetails(cpf, name, hashedPassword)
+
+      await this.userTempRepository.save(userTemp)
+
+      return right(null)
+    }
+
+    const user = UserTemp.create({
       cpf,
       email,
       name,
       password: hashedPassword,
     })
 
-    await this.userTempRepository.create(userTemp)
+    await this.userTempRepository.create(user)
 
     return right(null)
   }
