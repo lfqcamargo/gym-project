@@ -6,7 +6,6 @@ import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repos
 import { InMemoryUsersTempRepository } from 'test/repositories/in-memory-users-temp-repository'
 
 import { CreateUserTempUseCase } from './create-user-temp'
-import { AlreadyExistsCpfError } from './errors/already-exists-cpf-error'
 import { AlreadyExistsEmailError } from './errors/already-exists-email-error'
 
 let inMemoryUsersTempRepository: InMemoryUsersTempRepository
@@ -28,7 +27,6 @@ describe('Create new User', () => {
 
   it('should be able to create a new user', async () => {
     const result = await sut.execute({
-      cpf: '43210055555',
       email: 'lfqcamargo@gmail.com',
       name: 'Lucas Camargo',
       password: '123456',
@@ -52,22 +50,10 @@ describe('Create new User', () => {
     expect(result.value).toBeInstanceOf(AlreadyExistsEmailError)
   })
 
-  it('should not be able to create a new user with an existing cpf', async () => {
-    const oldUser = makeUser({ cpf: '43210055511' })
-    await inMemoryUsersRepository.create(oldUser)
-
-    const newUser = makeUser({ cpf: '43210055511' })
-    const result = await sut.execute(newUser)
-
-    expect(result.isLeft()).toBe(true)
-    expect(result.value).toBeInstanceOf(AlreadyExistsCpfError)
-  })
-
   it('should update your data if you already have a temporary email address', async () => {
     makeUserTemp({ email: 'lfqcamargo@gmail.com' })
 
     const result = await sut.execute({
-      cpf: '43210055555',
       email: 'lfqcamargo@gmail.com',
       name: 'Lucas Camargo',
       password: '123456',
@@ -82,7 +68,6 @@ describe('Create new User', () => {
     expect(dayjs(newUser.tokenExpiration).isSame(oneDayAhead, 'day')).toBe(true)
     expect(newUser).toEqual(
       expect.objectContaining({
-        cpf: '43210055555',
         email: 'lfqcamargo@gmail.com',
         name: 'Lucas Camargo',
         password: hashedPassword,
