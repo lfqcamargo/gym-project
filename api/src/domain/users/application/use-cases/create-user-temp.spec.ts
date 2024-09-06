@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { FakeHasher } from 'test/cryptography/fake-haser'
 import { makeUser } from 'test/factories/make-user'
-import { makeUserTemp } from 'test/factories/make-user temp'
+import { makeUserTemp } from 'test/factories/make-user-temp'
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 import { InMemoryUsersTempRepository } from 'test/repositories/in-memory-users-temp-repository'
 

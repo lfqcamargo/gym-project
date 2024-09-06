@@ -18,6 +18,16 @@ export class InMemoryUsersTempRepository implements UserTempRepository {
     return user
   }
 
+  async findByToken(token: string) {
+    const user = this.items.find((item) => item.token === token)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
