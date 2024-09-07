@@ -1,6 +1,8 @@
-import { Entity } from '@/core/entities/entity'
+import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
+
+import { EmailConfirmationCreatedEvent } from '../events/email-confirmation-event'
 
 export interface UserProps {
   email: string
@@ -10,7 +12,7 @@ export interface UserProps {
   lastLogin?: Date | null
 }
 
-export class User extends Entity<UserProps> {
+export class User extends AggregateRoot<UserProps> {
   get email() {
     return this.props.email
   }
@@ -47,6 +49,8 @@ export class User extends Entity<UserProps> {
       },
       id,
     )
+
+    user.addDomainEvent(new EmailConfirmationCreatedEvent(user))
 
     return user
   }

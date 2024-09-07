@@ -16,7 +16,7 @@ type EmailConfirmationTempUseCaseResponse = Either<TokenExpiredError, null>
 export class EmailConfirmationUseCase {
   constructor(
     private userTempRepository: UserTempRepository,
-    private createUserRepostiory: CreateUserUseCase,
+    private createUserUseCase: CreateUserUseCase,
   ) {}
 
   async execute({
@@ -34,7 +34,15 @@ export class EmailConfirmationUseCase {
       return left(new TokenExpiredError())
     }
 
-    // await this.createUserRepostiory.execute()
+    if (userTemp) {
+      await this.createUserUseCase.execute({
+        email: userTemp.email,
+        name: userTemp.name,
+        password: userTemp.password,
+      })
+    }
+
+    await this.userTempRepository.delete(userTemp.id.toString())
 
     return right(null)
   }

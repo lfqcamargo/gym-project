@@ -16,7 +16,5 @@ export class OnUserTempCreated implements EventHandler {
 
   private async sendNewUserTempNotification({
     userTemp,
-  }: UserTempCreatedEvent) {
-    console.log(userTemp)
-  }
+  }: UserTempCreatedEvent) {}
 }

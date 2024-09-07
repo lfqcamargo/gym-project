@@ -28,6 +28,8 @@ export class InMemoryUsersTempRepository implements UserTempRepository {
       return null
     }
 
+    DomainEvents.dispatchEventsForAggregate(user.id)
+
     return user
   }
 

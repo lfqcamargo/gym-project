@@ -28,5 +28,7 @@ describe('Confirmation Email', () => {
     const result = await sut.execute({ token: userTemp.token })
 
     expect(result.isRight()).toBe(true)
+    expect(inMemoryUsersRepository.items.length).toBe(1)
+    expect(inMemoryUsersTempRepository.items.length).toBe(0)
   })
 })
