@@ -2,9 +2,10 @@ import { randomUUID } from 'node:crypto'
 
 import dayjs from 'dayjs'
 
-import { Entity } from '@/core/entities/entity'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { AggregateRoot } from '@/core/entities/aggregate-root'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
+import { UserTempCreatedEvent } from '@/domain/users/enterprise/events/user-temp-created-event'
 
 export interface UserTempProps {
   email: string
@@ -15,7 +16,7 @@ export interface UserTempProps {
   tokenExpiration: Date
 }
 
-export class UserTemp extends Entity<UserTempProps> {
+export class UserTemp extends AggregateRoot<UserTempProps> {
   get email() {
     return this.props.email
   }
@@ -42,7 +43,7 @@ export class UserTemp extends Entity<UserTempProps> {
 
   static create(
     props: Optional<UserTempProps, 'createdAt' | 'token' | 'tokenExpiration'>,
-    id?: UniqueEntityId,
+    id?: UniqueEntityID,
   ) {
     const userTemp = new UserTemp(
       {
@@ -53,6 +54,8 @@ export class UserTemp extends Entity<UserTempProps> {
       },
       id,
     )
+
+    userTemp.addDomainEvent(new UserTempCreatedEvent(userTemp))
 
     return userTemp
   }

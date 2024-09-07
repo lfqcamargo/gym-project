@@ -1,5 +1,5 @@
 import { Entity } from '@/core/entities/entity'
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
 export interface UserProps {
@@ -39,7 +39,7 @@ export class User extends Entity<UserProps> {
     this.props.password = password
   }
 
-  static create(props: Optional<UserProps, 'createdAt'>, id?: UniqueEntityId) {
+  static create(props: Optional<UserProps, 'createdAt'>, id?: UniqueEntityID) {
     const user = new User(
       {
         ...props,

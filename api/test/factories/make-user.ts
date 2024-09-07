@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker'
 
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { User, UserProps } from '@/domain/users/enterprise/entities/user'
 
 export function makeUser(
   override: Partial<UserProps> = {},
-  id?: UniqueEntityId,
+  id?: UniqueEntityID,
 ) {
   const newUser = User.create(
     {

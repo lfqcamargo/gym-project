@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { UserTempRepository } from '@/domain/users/application/repositories/user-temp-repository'
 import { UserTemp } from '@/domain/users/enterprise/entities/user-temp'
 
@@ -6,6 +7,8 @@ export class InMemoryUsersTempRepository implements UserTempRepository {
 
   async create(data: UserTemp) {
     this.items.push(data)
+
+    DomainEvents.dispatchEventsForAggregate(data.id)
   }
 
   async findById(id: string) {
@@ -44,6 +47,8 @@ export class InMemoryUsersTempRepository implements UserTempRepository {
     )
 
     this.items[itemIndex] = data
+
+    DomainEvents.dispatchEventsForAggregate(data.id)
   }
 
   async delete(id: string) {

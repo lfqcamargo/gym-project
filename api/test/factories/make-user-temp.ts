@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto'
 import { faker } from '@faker-js/faker'
 import dayjs from 'dayjs'
 
-import { UniqueEntityId } from '@/core/entities/unique-entity-id'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {
   UserTemp,
   UserTempProps,
@@ -11,7 +11,7 @@ import {
 
 export function makeUserTemp(
   override: Partial<UserTempProps> = {},
-  id?: UniqueEntityId,
+  id?: UniqueEntityID,
 ) {
   const newUser = UserTemp.create(
     {
