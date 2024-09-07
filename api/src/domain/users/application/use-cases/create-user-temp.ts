@@ -32,12 +32,10 @@ export class CreateUserTempUseCase {
       return left(new AlreadyExistsEmailError())
     }
 
-    const hashedPassword = await this.hashGenerator.hash(password)
-
     const userTemp = await this.userTempRepository.findByEmail(email)
 
     if (userTemp) {
-      userTemp.updateDetails(name, hashedPassword)
+      userTemp.updateDetails(name, password)
 
       await this.userTempRepository.save(userTemp)
 
@@ -47,7 +45,7 @@ export class CreateUserTempUseCase {
     const user = UserTemp.create({
       email,
       name,
-      password: hashedPassword,
+      password,
     })
 
     await this.userTempRepository.create(user)

@@ -58,6 +58,14 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
-    "dayjs": "^1.11.13"
+    "@nestjs/config": "^3.2.3",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/passport": "^10.0.3",
+    "@prisma/client": "^5.19.1",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.13",
+    "zod": "^3.23.8",
+    "zod-validation-error": "^3.3.1"
   }
 }

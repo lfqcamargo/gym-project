@@ -1,6 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { User } from '@/domain/users/enterprise/entities/user'
 
+import { HashGenerator } from '../cryptography/hash-generator'
 import { UserRepository } from '../repositories/user-repository'
 import { AlreadyExistsEmailError } from './errors/already-exists-email-error'
 
@@ -13,7 +14,10 @@ interface CreateUserUseCaseRequest {
 type CreateUserUseCaseResponse = Either<AlreadyExistsEmailError, null>
 
 export class CreateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private hashGenerator: HashGenerator,
+  ) {}
 
   async execute({
     email,
@@ -26,10 +30,12 @@ export class CreateUserUseCase {
       return left(new AlreadyExistsEmailError())
     }
 
+    const hashedPassword = await this.hashGenerator.hash(password)
+
     const user = User.create({
       email,
       name,
-      password,
+      password: hashedPassword,
     })
 
     await this.userRepository.create(user)
