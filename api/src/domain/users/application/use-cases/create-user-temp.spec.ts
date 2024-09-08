@@ -32,12 +32,8 @@ describe('Create new User', () => {
       password: '123456',
     })
 
-    const hashedPassword = await fakeHasher.hash('123456')
-
     expect(result.isRight()).toBe(true)
-    expect(inMemoryUsersTempRepository.items[0].password).toEqual(
-      hashedPassword,
-    )
+    expect(inMemoryUsersTempRepository.items[0].password).toEqual('123456')
   })
   it('should not be able to create a new user with an existing email', async () => {
     const oldUser = makeUser({ email: 'lfqcamargo@gmail.com' })
@@ -60,7 +56,6 @@ describe('Create new User', () => {
     })
 
     const newUser = inMemoryUsersTempRepository.items[0]
-    const hashedPassword = await fakeHasher.hash('123456')
     const oneDayAhead = dayjs().add(1, 'day').toDate()
 
     expect(result.isRight()).toBe(true)
@@ -70,7 +65,7 @@ describe('Create new User', () => {
       expect.objectContaining({
         email: 'lfqcamargo@gmail.com',
         name: 'Lucas Camargo',
-        password: hashedPassword,
+        password: '123456',
       }),
     )
   })

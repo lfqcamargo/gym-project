@@ -11,7 +11,7 @@ import { z } from 'zod'
 import { WrongCredentialsError } from '@/domain/users/application/use-cases/errors/wrong-credentials-error'
 import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { NestAuthenticateUserUseCase } from '@/infra/injectables/nest-user-use-case'
+import { NestAuthenticateUserUseCase } from '@/infra/injectables/nest-user-temp-use-case'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),

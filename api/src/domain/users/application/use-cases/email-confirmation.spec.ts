@@ -1,3 +1,4 @@
+import { FakeHasher } from 'test/cryptography/fake-haser'
 import { makeUserTemp } from 'test/factories/make-user-temp'
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 import { InMemoryUsersTempRepository } from 'test/repositories/in-memory-users-temp-repository'
@@ -7,6 +8,7 @@ import { EmailConfirmationUseCase } from './email-confirmation'
 
 let inMemoryUsersTempRepository: InMemoryUsersTempRepository
 let inMemoryUsersRepository: InMemoryUsersRepository
+let fakeHasher: FakeHasher
 let createUserUseCase: CreateUserUseCase
 let sut: EmailConfirmationUseCase
 
@@ -14,7 +16,11 @@ describe('Confirmation Email', () => {
   beforeEach(() => {
     inMemoryUsersTempRepository = new InMemoryUsersTempRepository()
     inMemoryUsersRepository = new InMemoryUsersRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUsersRepository)
+    fakeHasher = new FakeHasher()
+    createUserUseCase = new CreateUserUseCase(
+      inMemoryUsersRepository,
+      fakeHasher,
+    )
     sut = new EmailConfirmationUseCase(
       inMemoryUsersTempRepository,
       createUserUseCase,

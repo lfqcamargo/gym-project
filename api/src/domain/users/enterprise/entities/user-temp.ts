@@ -11,7 +11,6 @@ export interface UserTempProps {
   email: string
   name: string
   password: string
-  createdAt: Date
   token: string
   tokenExpiration: Date
 }
@@ -29,10 +28,6 @@ export class UserTemp extends AggregateRoot<UserTempProps> {
     return this.props.password
   }
 
-  get createdAt() {
-    return this.props.createdAt
-  }
-
   get token() {
     return this.props.token
   }
@@ -42,13 +37,12 @@ export class UserTemp extends AggregateRoot<UserTempProps> {
   }
 
   static create(
-    props: Optional<UserTempProps, 'createdAt' | 'token' | 'tokenExpiration'>,
+    props: Optional<UserTempProps, 'token' | 'tokenExpiration'>,
     id?: UniqueEntityID,
   ) {
     const userTemp = new UserTemp(
       {
         ...props,
-        createdAt: new Date(),
         token: randomUUID(),
         tokenExpiration: dayjs().add(1, 'day').toDate(),
       },
@@ -69,6 +63,5 @@ export class UserTemp extends AggregateRoot<UserTempProps> {
   private touch() {
     this.props.token = randomUUID()
     this.props.tokenExpiration = dayjs().add(1, 'day').toDate()
-    this.props.createdAt = new Date()
   }
 }

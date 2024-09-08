@@ -1,0 +1,12 @@
+services:
+  postgres:
+    container_name: gym_project
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: gym_project
+    volumes:
+      - ./data/pg:/data/postgres
