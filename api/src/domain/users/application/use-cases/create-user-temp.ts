@@ -1,7 +1,8 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { UserTemp } from '@/domain/users/enterprise/entities/user-temp'
 
-import { HashGenerator } from '../cryptography/hash-generator'
 import { UserRepository } from '../repositories/user-repository'
 import { UserTempRepository } from '../repositories/user-temp-repository'
 import { AlreadyExistsEmailError } from './errors/already-exists-email-error'
@@ -14,11 +15,11 @@ interface CreateUserTempUseCaseRequest {
 
 type CreateUserTempUseCaseResponse = Either<AlreadyExistsEmailError, null>
 
+@Injectable()
 export class CreateUserTempUseCase {
   constructor(
     private userTempRepository: UserTempRepository,
     private userRepository: UserRepository,
-    private hashGenerator: HashGenerator,
   ) {}
 
   async execute({

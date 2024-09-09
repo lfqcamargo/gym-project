@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 
 import { Encrypter } from '../cryptography/encrypter'
@@ -17,6 +19,7 @@ type AuthenticateUserUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class AuthenticateUserUseCase {
   constructor(
     private usersRepository: UserRepository,

@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common'
 import { z } from 'zod'
 
+import { AuthenticateUserUseCase } from '@/domain/users/application/use-cases/authenticate-user'
 import { WrongCredentialsError } from '@/domain/users/application/use-cases/errors/wrong-credentials-error'
 import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { NestAuthenticateUserUseCase } from '@/infra/injectables/nest-user-temp-use-case'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -23,7 +23,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 @Controller('/sessions')
 @Public()
 export class AuthenticateController {
-  constructor(private authenticateUser: NestAuthenticateUserUseCase) {}
+  constructor(private authenticateUser: AuthenticateUserUseCase) {}
 
   @Post()
   @UsePipes(new ZodValidationPipe(authenticateBodySchema))

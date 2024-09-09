@@ -5,6 +5,7 @@ import { UserRepository } from '@/domain/users/application/repositories/user-rep
 import { UserTempRepository } from '@/domain/users/application/repositories/user-temp-repository'
 
 import { PrismaService } from './prisma/prisma.service'
+import { PrismaUserRepository } from './prisma/repositories/prisma-user-repository'
 import { PrismaUserTempRepository } from './prisma/repositories/prisma-user-temp-repository'
 
 @Module({
@@ -17,7 +18,7 @@ import { PrismaUserTempRepository } from './prisma/repositories/prisma-user-temp
     },
     {
       provide: UserRepository,
-      useClass: PrismaUserTempRepository,
+      useClass: PrismaUserRepository,
     },
   ],
   exports: [PrismaService, PrismaClient, UserTempRepository, UserRepository],

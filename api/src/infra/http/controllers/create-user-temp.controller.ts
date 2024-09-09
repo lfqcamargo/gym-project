@@ -8,10 +8,10 @@ import {
 } from '@nestjs/common'
 import { z } from 'zod'
 
+import { CreateUserTempUseCase } from '@/domain/users/application/use-cases/create-user-temp'
 import { AlreadyExistsEmailError } from '@/domain/users/application/use-cases/errors/already-exists-email-error'
 import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
-import { NestCreateUserTempUseCase } from '@/infra/injectables/nest-user-temp-use-case'
 
 const bodySchema = z.object({
   email: z.string().email(),
@@ -24,7 +24,7 @@ type BodySchema = z.infer<typeof bodySchema>
 @Controller('/users')
 @Public()
 export class CreateUserTempController {
-  constructor(private createUserTemp: NestCreateUserTempUseCase) {}
+  constructor(private createUserTemp: CreateUserTempUseCase) {}
 
   @Post()
   @UsePipes(new ZodValidationPipe(bodySchema))
