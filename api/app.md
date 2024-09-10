@@ -1,12 +1,12 @@
 ## Cadastro
 [ ] - Cadastrar atravez de redes sociais
-[ ] - Cadastrar com email
-[ ] - Deve ser enviado um email de confirmação
-[ ] - Email único
-[ ] - Senha em hash
+[X] - Cadastrar com email
+[X] - Deve ser enviado um email de confirmação
+[X] - Email único
+[X] - Senha em hash
 
 ## Login
-[ ] - Authenticação por senha
+[X] - Authenticação por senha
 [ ] - Authenticação de terceiros
 
 ## Perfil
@@ -19,7 +19,7 @@
 [ ] - Atualizar Meta de peso, medida, gordura
 [ ] - Atualizar itens da galeria
 [ ] - Criar novos itens da galeria
-[ ] - Exlcuir itens da galeria
+[ ] - Excluir itens da galeria
 [ ] - Excluir foto de perfil
 [ ] - Excluir foto de fundo
 
