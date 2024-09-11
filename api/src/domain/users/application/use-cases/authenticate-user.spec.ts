@@ -25,7 +25,7 @@ describe('Authenticate User', () => {
   })
 
   it('should be able to authenticate a user', async () => {
-    const user = makeUser({
+    const { user } = makeUser({
       email: 'johndoe@example.com',
       password: await fakeHasher.hash('123456'),
     })

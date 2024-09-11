@@ -1,5 +1,6 @@
 import { FakeHasher } from 'test/cryptography/fake-haser'
 import { makeUserTemp } from 'test/factories/make-user-temp'
+import { InMemoryProfilesRepository } from 'test/repositories/in-memory-profiles-repository'
 import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 import { InMemoryUsersTempRepository } from 'test/repositories/in-memory-users-temp-repository'
 
@@ -8,6 +9,7 @@ import { EmailConfirmationUseCase } from './email-confirmation'
 
 let inMemoryUsersTempRepository: InMemoryUsersTempRepository
 let inMemoryUsersRepository: InMemoryUsersRepository
+let inMemoryProfilesRepository: InMemoryProfilesRepository
 let fakeHasher: FakeHasher
 let createUserUseCase: CreateUserUseCase
 let sut: EmailConfirmationUseCase
@@ -16,9 +18,11 @@ describe('Confirmation Email', () => {
   beforeEach(() => {
     inMemoryUsersTempRepository = new InMemoryUsersTempRepository()
     inMemoryUsersRepository = new InMemoryUsersRepository()
+    inMemoryProfilesRepository = new InMemoryProfilesRepository()
     fakeHasher = new FakeHasher()
     createUserUseCase = new CreateUserUseCase(
       inMemoryUsersRepository,
+      inMemoryProfilesRepository,
       fakeHasher,
     )
     sut = new EmailConfirmationUseCase(
@@ -35,6 +39,7 @@ describe('Confirmation Email', () => {
 
     expect(result.isRight()).toBe(true)
     expect(inMemoryUsersRepository.items.length).toBe(1)
+    expect(inMemoryProfilesRepository.items.length).toBe(1)
     expect(inMemoryUsersTempRepository.items.length).toBe(0)
   })
 })

@@ -13,7 +13,7 @@ describe('On User  Created', () => {
   it('should  send a notification when an user  is created', async () => {
     const _onEmailConfirmationCreated = new OnEmailConfirmationCreated()
 
-    const user = makeUser()
+    const { user } = makeUser()
 
     inMemoryUsersRepository.create(user)
   })

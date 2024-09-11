@@ -42,12 +42,4 @@ export class PrismaProfileRepository implements ProfileRepository {
       data,
     })
   }
-
-  async delete(userId: string): Promise<void> {
-    await this.prisma.profile.delete({
-      where: {
-        userId,
-      },
-    })
-  }
 }
