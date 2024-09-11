@@ -5,7 +5,7 @@ import { User } from '@/domain/users/enterprise/entities/user'
 
 export class PrismaUserMapper {
   static toDomain(raw: PrismaUser): User {
-    return User.create(
+    const { user } = User.create(
       {
         name: raw.name,
         email: raw.email,
@@ -15,6 +15,8 @@ export class PrismaUserMapper {
       },
       new UniqueEntityID(raw.id),
     )
+
+    return user
   }
 
   static toPrisma(user: User): Prisma.UserUncheckedCreateInput {

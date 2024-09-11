@@ -32,5 +32,18 @@ model User {
   createdAt DateTime  @default(now()) @map("created_at")
   lastLogin DateTime? @map("last_login")
 
+  profile Profile[]
+
   @@map("users")
+}
+
+model Profile {
+  userId       String  @id
+  description  String?
+  profilePhoto Bytes?  @map("profile_photo")
+  coverPhoto   Bytes?  @map("cover_photo")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
 }

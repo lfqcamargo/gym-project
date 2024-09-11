@@ -3,6 +3,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
 import { EmailConfirmationCreatedEvent } from '../events/email-confirmation-event'
+import { Profile } from './profile'
 
 export interface UserProps {
   email: string
@@ -50,8 +51,17 @@ export class User extends AggregateRoot<UserProps> {
       id,
     )
 
+    const profile = Profile.create(
+      {
+        description: null,
+        profilePhoto: null,
+        coverPhoto: null,
+      },
+      user.id,
+    )
+
     user.addDomainEvent(new EmailConfirmationCreatedEvent(user))
 
-    return user
+    return { user, profile }
   }
 }
