@@ -10,7 +10,7 @@
 [ ] - Authenticação de terceiros
 
 ## Perfil
-[ ] - Atualizar uma descrição
+[X] - Atualizar uma descrição
 [ ] - Atualizar medidas de todos os musculos
 [ ] - Atualizar gordura corporal de todos os musculos
 [ ] - Atualizar dados de tamanho, peso

@@ -43,7 +43,7 @@ model Profile {
   profilePhoto Bytes?  @map("profile_photo")
   coverPhoto   Bytes?  @map("cover_photo")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("profiles")
 }
