@@ -6,6 +6,7 @@ import { CreateUserTempUseCase } from '@/domain/users/application/use-cases/crea
 import { EditProfileUseCase } from '@/domain/users/application/use-cases/edit-profile'
 import { EditUserUseCase } from '@/domain/users/application/use-cases/edit-user'
 import { EmailConfirmationUseCase } from '@/domain/users/application/use-cases/email-confirmation'
+import { GetProfileUseCase } from '@/domain/users/application/use-cases/get-profile'
 import { DatabaseModule } from '@/infra/database/database.module'
 
 import { CryptographyModule } from '../cryptography/cryptography.module'
@@ -14,6 +15,7 @@ import { CreateUserTempController } from './controllers/create-user-temp.control
 import { EditProfileController } from './controllers/edit-profile'
 import { EditUserController } from './controllers/edit-user.controller'
 import { EmailConfirmationController } from './controllers/email-confirmation.controller'
+import { GetProfileController } from './controllers/get-profile.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -23,6 +25,7 @@ import { EmailConfirmationController } from './controllers/email-confirmation.co
     EmailConfirmationController,
     EditUserController,
     EditProfileController,
+    GetProfileController,
   ],
   providers: [
     AuthenticateUserUseCase,
@@ -31,6 +34,7 @@ import { EmailConfirmationController } from './controllers/email-confirmation.co
     CreateUserUseCase,
     EditUserUseCase,
     EditProfileUseCase,
+    GetProfileUseCase,
   ],
 })
 export class HttpModule {}
