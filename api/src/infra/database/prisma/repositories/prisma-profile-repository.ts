@@ -18,10 +18,10 @@ export class PrismaProfileRepository implements ProfileRepository {
     })
   }
 
-  async findById(userId: string): Promise<Profile | null> {
+  async findById(id: string): Promise<Profile | null> {
     const profile = await this.prisma.profile.findUnique({
       where: {
-        userId,
+        id,
       },
     })
 
@@ -37,7 +37,7 @@ export class PrismaProfileRepository implements ProfileRepository {
 
     await this.prisma.profile.update({
       where: {
-        userId: profile.id.toString(),
+        id: profile.id.toString(),
       },
       data,
     })

@@ -32,18 +32,66 @@ model User {
   createdAt DateTime  @default(now()) @map("created_at")
   lastLogin DateTime? @map("last_login")
 
-  profile Profile[]
+  profile         Profile[]
+  BodyMeasurement BodyMeasurement[]
+  BodyFat         BodyFat[]
 
   @@map("users")
 }
 
 model Profile {
-  userId       String  @id
+  id           String  @id
   description  String?
   profilePhoto Bytes?  @map("profile_photo")
   coverPhoto   Bytes?  @map("cover_photo")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@map("profiles")
+}
+
+model BodyMeasurement {
+  id                 String   @id
+  leftRelaxedArm     Float    @map("left_relaxed_arm")
+  rightRelaxedArm    Float    @map("right_relaxed_arm")
+  leftContractedArm  Float    @map("left_contracted_arm")
+  rightContractedArm Float    @map("right_contracted_arm")
+  leftForearm        Float    @map("left_forearm")
+  rightForearm       Float    @map("right_forearm")
+  leftThigh          Float    @map("left_thigh")
+  rightThigh         Float    @map("right_thigh")
+  leftCalf           Float    @map("left_calf")
+  rightCalf          Float    @map("right_calf")
+  relaxedChest       Float    @map("relaxed_chest")
+  inspiredChest      Float    @map("inspired_chest")
+  waist              Float    @map("waist")
+  abdomen            Float    @map("abdomen")
+  hip                Float    @map("hip")
+  neck               Float    @map("neck")
+  shoulder           Float    @map("shoulder")
+  upperSkinfolds     Float    @map("upper_skinfolds")
+  lowerSkinfolds     Float    @map("lower_skinfolds")
+  updatedDate        DateTime @default(now()) @map("updated_date")
+
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("body_measurements")
+}
+
+model BodyFat {
+  id          String   @id
+  subscapular Float    @map("subscapular")
+  triceps     Float    @map("triceps")
+  biceps      Float    @map("biceps")
+  chest       Float    @map("chest")
+  midAxillary Float    @map("mid_axillary")
+  suprailiac  Float    @map("suprailiac")
+  abdominal   Float    @map("abdominal")
+  medialThigh Float    @map("medial_thigh")
+  medialCalf  Float    @map("medial_calf")
+  updatedDate DateTime @default(now()) @map("updated_date")
+
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("body_fat")
 }

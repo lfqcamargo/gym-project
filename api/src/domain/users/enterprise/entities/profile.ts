@@ -32,12 +32,12 @@ export class Profile extends Entity<ProfileProps> {
     this.props.coverPhoto = cover_photo
   }
 
-  static create(props: ProfileProps, userId: UniqueEntityID) {
+  static create(props: ProfileProps, id: UniqueEntityID) {
     const profile = new Profile(
       {
         ...props,
       },
-      userId,
+      id,
     )
 
     return profile

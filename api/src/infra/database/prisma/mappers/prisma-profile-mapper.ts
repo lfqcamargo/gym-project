@@ -11,13 +11,13 @@ export class PrismaProfileMapper {
         profilePhoto: raw.profilePhoto,
         coverPhoto: raw.coverPhoto,
       },
-      new UniqueEntityID(raw.userId),
+      new UniqueEntityID(raw.id),
     )
   }
 
   static toPrisma(Profile: Profile): Prisma.ProfileUncheckedCreateInput {
     return {
-      userId: Profile.id.toString(),
+      id: Profile.id.toString(),
       description: Profile.description,
       profilePhoto: Profile.profilePhoto,
       coverPhoto: Profile.coverPhoto,
