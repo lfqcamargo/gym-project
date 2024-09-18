@@ -1,4 +1,3 @@
-import { DomainEvents } from '@/core/events/domain-events'
 import { UserRepository } from '@/domain/users/application/repositories/user-repository'
 import { User } from '@/domain/users/enterprise/entities/user'
 
@@ -7,8 +6,6 @@ export class InMemoryUsersRepository implements UserRepository {
 
   async create(data: User) {
     this.items.push(data)
-
-    DomainEvents.dispatchEventsForAggregate(data.id)
   }
 
   async findById(id: string) {
