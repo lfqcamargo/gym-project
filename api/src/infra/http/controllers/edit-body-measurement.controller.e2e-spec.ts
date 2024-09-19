@@ -70,8 +70,6 @@ describe('Edit BodyMeasurement (E2E)', () => {
       },
     })
 
-    console.log(bodyMeasurementOnDatabase)
-
     expect(bodyMeasurementOnDatabase).toBeTruthy()
     expect(bodyMeasurementOnDatabase?.leftRelaxedArm).toBe(35)
     expect(bodyMeasurementOnDatabase?.rightRelaxedArm).toBe(36)

@@ -16,6 +16,7 @@ CREATE TABLE "users" (
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "last_login" TIMESTAMP(3),
 
@@ -81,6 +82,9 @@ CREATE UNIQUE INDEX "users_temp_email_key" ON "users_temp"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_slug_key" ON "users"("slug");
 
 -- AddForeignKey
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
