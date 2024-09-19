@@ -29,6 +29,7 @@ model User {
   email     String    @unique
   name      String
   password  String
+  slug      String    @unique
   createdAt DateTime  @default(now()) @map("created_at")
   lastLogin DateTime? @map("last_login")
 

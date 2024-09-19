@@ -7,6 +7,7 @@ import { HashGenerator } from '../cryptography/hash-generator'
 import { ProfileRepository } from '../repositories/profile-repository'
 import { UserRepository } from '../repositories/user-repository'
 import { AlreadyExistsEmailError } from './errors/already-exists-email-error'
+import { Slug } from './value-objects/slug'
 
 interface CreateUserUseCaseRequest {
   email: string
@@ -42,6 +43,17 @@ export class CreateUserUseCase {
       name,
       password: hashedPassword,
     })
+
+    let slugValue = Slug.createFromText(name).value
+    const baseSlug = slugValue
+    let suffix = 1
+
+    while (await this.userRepository.findBySlug(slugValue)) {
+      slugValue = `${baseSlug}-${suffix}`
+      suffix++
+    }
+
+    user.slug = Slug.create(slugValue)
 
     await this.userRepository.create(user)
     await this.profileRepository.create(profile)

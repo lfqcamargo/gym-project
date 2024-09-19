@@ -108,7 +108,6 @@ describe('EditBodyMeasurementUseCase', () => {
       lowerSkinfolds: 10,
     })
 
-    console.log(inMemoryBodyMeasurementRepository.items[0])
     expect(result.isRight()).toBe(true)
     expect(inMemoryBodyMeasurementRepository.items[0].leftRelaxedArm).toEqual(
       35,

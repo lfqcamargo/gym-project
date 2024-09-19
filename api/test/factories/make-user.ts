@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Slug } from '@/domain/users/application/use-cases/value-objects/slug'
 import { User, UserProps } from '@/domain/users/enterprise/entities/user'
 import { PrismaProfileMapper } from '@/infra/database/prisma/mappers/prisma-profile-mapper'
 import { PrismaUserMapper } from '@/infra/database/prisma/mappers/prisma-user-mapper'
@@ -10,6 +11,7 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 export function makeUser(
   override: Partial<UserProps> = {},
   id?: UniqueEntityID,
+  existingSlugs: string[] = [],
 ) {
   const { user, profile } = User.create(
     {
@@ -20,6 +22,19 @@ export function makeUser(
     },
     id,
   )
+
+  let slugValue = Slug.createFromText(user.name).value
+  const baseSlug = slugValue
+  let suffix = 1
+
+  while (existingSlugs.includes(slugValue)) {
+    slugValue = `${baseSlug}-${suffix}`
+    suffix++
+  }
+
+  user.slug = Slug.create(slugValue)
+
+  existingSlugs.push(slugValue)
 
   return { user, profile }
 }
