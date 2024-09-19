@@ -3,40 +3,44 @@ import {
   Body,
   Controller,
   InternalServerErrorException,
-  Patch,
+  Put,
 } from '@nestjs/common'
 import { z } from 'zod'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { EditUserUseCase } from '@/domain/users/application/use-cases/edit-user'
+import { EditBodyFatUseCase } from '@/domain/users/application/use-cases/edit-body-fat'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
 const bodySchema = z.object({
-  name: z.string().optional(),
-  password: z.string().optional(),
+  subscapular: z.number(),
+  triceps: z.number(),
+  biceps: z.number(),
+  chest: z.number(),
+  midAxillary: z.number(),
+  suprailiac: z.number(),
+  abdominal: z.number(),
+  medialThigh: z.number(),
+  medialCalf: z.number(),
 })
 
 type BodySchema = z.infer<typeof bodySchema>
 
-@Controller('/users')
-export class EditUserController {
-  constructor(private editUser: EditUserUseCase) {}
+@Controller('/body-fat')
+export class EditBodyFatController {
+  constructor(private editBodyFatUseCase: EditBodyFatUseCase) {}
 
-  @Patch()
+  @Put()
   async handle(
-    @Body(new ZodValidationPipe(bodySchema))
-    body: BodySchema,
+    @Body(new ZodValidationPipe(bodySchema)) body: BodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-    const { name, password } = body
     const id = user.sub
 
-    const result = await this.editUser.execute({
+    const result = await this.editBodyFatUseCase.execute({
       id,
-      name,
-      password,
+      ...body,
     })
 
     if (result.isLeft()) {

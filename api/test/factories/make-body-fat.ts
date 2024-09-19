@@ -1,10 +1,13 @@
 import { faker } from '@faker-js/faker'
+import { Injectable } from '@nestjs/common'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {
   BodyFat,
   BodyFatProps,
 } from '@/domain/users/enterprise/entities/body-fat'
+import { PrismaBodyFatMapper } from '@/infra/database/prisma/mappers/prisma-body-fat-mapper'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 export function makeBodyFat(
   override: Partial<BodyFatProps> = {},
@@ -28,4 +31,19 @@ export function makeBodyFat(
   )
 
   return { bodyFat }
+}
+
+@Injectable()
+export class BodyFatFactory {
+  constructor(private prisma: PrismaService) {}
+
+  async makePrismaBodyFat(data: Partial<BodyFatProps> = {}): Promise<BodyFat> {
+    const { bodyFat } = makeBodyFat(data)
+
+    await this.prisma.bodyFat.create({
+      data: PrismaBodyFatMapper.toPrisma(bodyFat),
+    })
+
+    return bodyFat
+  }
 }

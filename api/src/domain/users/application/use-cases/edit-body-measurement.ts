@@ -70,7 +70,7 @@ export class EditBodyMeasurementUseCase {
         return left(new ResourceNotFoundError())
       }
 
-      BodyMeasurement.create(
+      const newBodyMeasurement = BodyMeasurement.create(
         {
           leftRelaxedArm,
           rightRelaxedArm,
@@ -94,6 +94,8 @@ export class EditBodyMeasurementUseCase {
         },
         user.id,
       )
+
+      await this.bodyMeasurementRepository.create(newBodyMeasurement)
     } else {
       bodyMeasurement.leftRelaxedArm = leftRelaxedArm
       bodyMeasurement.rightRelaxedArm = rightRelaxedArm

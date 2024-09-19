@@ -1,13 +1,13 @@
 import { faker } from '@faker-js/faker'
+import { Injectable } from '@nestjs/common'
 
-// import { Injectable } from '@nestjs/common'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {
   BodyMeasurement,
   BodyMeasurementProps,
 } from '@/domain/users/enterprise/entities/body-measurement'
-// import { PrismaBodyMeasurementMapper } from '@/infra/database/prisma/mappers/prisma-body-measurement-mapper'
-// import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { PrismaBodyMeasurementMapper } from '@/infra/database/prisma/mappers/prisma-body-measurement-mapper'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 export function makeBodyMeasurement(
   override: Partial<BodyMeasurementProps> = {},
@@ -43,19 +43,19 @@ export function makeBodyMeasurement(
   return { bodyMeasurement }
 }
 
-// @Injectable()
-// export class BodyMeasurementFactory {
-//   constructor(private prisma: PrismaService) {}
+@Injectable()
+export class BodyMeasurementFactory {
+  constructor(private prisma: PrismaService) {}
 
-//   async makePrismaBodyMeasurement(
-//     data: Partial<BodyMeasurementProps> = {},
-//   ): Promise<BodyMeasurement> {
-//     const { bodyMeasurement } = makeBodyMeasurement(data)
+  async makePrismaBodyMeasurement(
+    data: Partial<BodyMeasurementProps> = {},
+  ): Promise<BodyMeasurement> {
+    const { bodyMeasurement } = makeBodyMeasurement(data)
 
-//     await this.prisma.bodyMeasurement.create({
-//       data: PrismaBodyMeasurementMapper.toPrisma(bodyMeasurement),
-//     })
+    await this.prisma.bodyMeasurement.create({
+      data: PrismaBodyMeasurementMapper.toPrisma(bodyMeasurement),
+    })
 
-//     return bodyMeasurement
-//   }
-// }
+    return bodyMeasurement
+  }
+}

@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  InternalServerErrorException,
   Patch,
   UploadedFiles,
   UseInterceptors,
@@ -9,6 +10,7 @@ import {
 import { FileFieldsInterceptor } from '@nestjs/platform-express'
 import { z } from 'zod'
 
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditProfileUseCase } from '@/domain/users/application/use-cases/edit-profile'
 import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
@@ -61,7 +63,13 @@ export class EditProfileController {
 
     if (result.isLeft()) {
       const error = result.value
-      throw new BadRequestException(error.message)
+
+      switch (error.constructor) {
+        case ResourceNotFoundError:
+          throw new BadRequestException(error.message)
+        default:
+          throw new InternalServerErrorException(error.message)
+      }
     }
   }
 }
