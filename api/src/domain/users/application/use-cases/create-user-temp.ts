@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 
 import { Either, left, right } from '@/core/either'
 import { UserTemp } from '@/domain/users/enterprise/entities/user-temp'
@@ -17,6 +17,7 @@ type CreateUserTempUseCaseResponse = Either<AlreadyExistsEmailError, null>
 
 @Injectable()
 export class CreateUserTempUseCase {
+  private readonly logger = new Logger(CreateUserTempUseCase.name)
   constructor(
     private userTempRepository: UserTempRepository,
     private userRepository: UserRepository,
@@ -34,12 +35,11 @@ export class CreateUserTempUseCase {
     }
 
     const userTemp = await this.userTempRepository.findByEmail(email)
-
     if (userTemp) {
       userTemp.updateDetails(name, password)
 
       await this.userTempRepository.save(userTemp)
-
+      this.logger.log(`User Temp Token: ${userTemp.token}`)
       return right(null)
     }
 
@@ -50,6 +50,8 @@ export class CreateUserTempUseCase {
     })
 
     await this.userTempRepository.create(user)
+
+    this.logger.log(`User Temp Token: ${user.token}`)
 
     return right(null)
   }
