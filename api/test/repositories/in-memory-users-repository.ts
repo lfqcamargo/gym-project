@@ -29,7 +29,7 @@ export class InMemoryUsersRepository implements UserRepository {
   }
 
   async findBySlug(slug: string) {
-    const user = this.items.find((item) => item.slug?.value === slug)
+    const user = this.items.find((item) => item.slug.value === slug)
 
     if (!user) {
       return null

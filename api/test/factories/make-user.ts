@@ -13,17 +13,8 @@ export function makeUser(
   id?: UniqueEntityID,
   existingSlugs: string[] = [],
 ) {
-  const { user, profile } = User.create(
-    {
-      email: faker.internet.email(),
-      name: faker.person.fullName(),
-      password: '123456',
-      ...override,
-    },
-    id,
-  )
-
-  let slugValue = Slug.createFromText(user.name).value
+  const name = faker.person.fullName()
+  let slugValue = Slug.createFromText(name).value
   const baseSlug = slugValue
   let suffix = 1
 
@@ -32,9 +23,20 @@ export function makeUser(
     suffix++
   }
 
-  user.slug = Slug.create(slugValue)
+  const slug = Slug.create(slugValue)
 
   existingSlugs.push(slugValue)
+
+  const { user, profile } = User.create(
+    {
+      email: faker.internet.email(),
+      name,
+      password: '123456',
+      slug,
+      ...override,
+    },
+    id,
+  )
 
   return { user, profile }
 }

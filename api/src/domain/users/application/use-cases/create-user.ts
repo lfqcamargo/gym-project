@@ -38,12 +38,6 @@ export class CreateUserUseCase {
 
     const hashedPassword = await this.hashGenerator.hash(password)
 
-    const { user, profile } = User.create({
-      email,
-      name,
-      password: hashedPassword,
-    })
-
     let slugValue = Slug.createFromText(name).value
     const baseSlug = slugValue
     let suffix = 1
@@ -53,7 +47,14 @@ export class CreateUserUseCase {
       suffix++
     }
 
-    user.slug = Slug.create(slugValue)
+    const slug = Slug.create(slugValue)
+
+    const { user, profile } = User.create({
+      email,
+      name,
+      password: hashedPassword,
+      slug,
+    })
 
     await this.userRepository.create(user)
     await this.profileRepository.create(profile)

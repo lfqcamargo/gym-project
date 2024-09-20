@@ -10,7 +10,7 @@ export interface UserProps {
   email: string
   name: string
   password: string
-  slug?: Slug
+  slug: Slug
   createdAt: Date
   lastLogin?: Date | null
 }
@@ -28,12 +28,8 @@ export class User extends AggregateRoot<UserProps> {
     return this.props.password
   }
 
-  get slug(): Slug | null {
-    if (this.props.slug) {
-      return this.props.slug
-    }
-
-    return null
+  get slug() {
+    return this.props.slug
   }
 
   get createdAt() {
@@ -50,10 +46,6 @@ export class User extends AggregateRoot<UserProps> {
 
   set password(password: string) {
     this.props.password = password
-  }
-
-  set slug(slug: Slug) {
-    this.props.slug = slug
   }
 
   static create(props: Optional<UserProps, 'createdAt'>, id?: UniqueEntityID) {
