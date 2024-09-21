@@ -27,7 +27,7 @@ export class PrismaUserMapper {
       email: user.email,
       name: user.name,
       password: user.password,
-      slug: user.slug?.value || '',
+      slug: user.slug.value,
       createdAt: user.createdAt,
       lastLogin: user.lastLogin,
     }

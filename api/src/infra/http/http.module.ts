@@ -9,6 +9,7 @@ import { EditProfileUseCase } from '@/domain/users/application/use-cases/edit-pr
 import { EditUserUseCase } from '@/domain/users/application/use-cases/edit-user'
 import { EmailConfirmationUseCase } from '@/domain/users/application/use-cases/email-confirmation'
 import { GetProfileUseCase } from '@/domain/users/application/use-cases/get-profile'
+import { GetProfileBySlugUseCase } from '@/domain/users/application/use-cases/get-profile-by-slug'
 import { DatabaseModule } from '@/infra/database/database.module'
 
 import { CryptographyModule } from '../cryptography/cryptography.module'
@@ -20,6 +21,7 @@ import { EditProfileController } from './controllers/edit-profile'
 import { EditUserController } from './controllers/edit-user.controller'
 import { EmailConfirmationController } from './controllers/email-confirmation.controller'
 import { GetProfileController } from './controllers/get-profile.controller'
+import { GetProfileBySlugController } from './controllers/get-profile-by-slug.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -32,6 +34,7 @@ import { GetProfileController } from './controllers/get-profile.controller'
     GetProfileController,
     EditBodyMeasurementController,
     EditBodyFatController,
+    GetProfileBySlugController,
   ],
   providers: [
     AuthenticateUserUseCase,
@@ -43,6 +46,7 @@ import { GetProfileController } from './controllers/get-profile.controller'
     GetProfileUseCase,
     EditBodyMeasurementUseCase,
     EditBodyFatUseCase,
+    GetProfileBySlugUseCase,
   ],
 })
 export class HttpModule {}
