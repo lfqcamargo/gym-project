@@ -37,8 +37,11 @@ export function makeBodyFat(
 export class BodyFatFactory {
   constructor(private prisma: PrismaService) {}
 
-  async makePrismaBodyFat(data: Partial<BodyFatProps> = {}): Promise<BodyFat> {
-    const { bodyFat } = makeBodyFat(data)
+  async makePrismaBodyFat(
+    data: Partial<BodyFatProps> = {},
+    id?: UniqueEntityID,
+  ): Promise<BodyFat> {
+    const { bodyFat } = makeBodyFat(data, id)
 
     await this.prisma.bodyFat.create({
       data: PrismaBodyFatMapper.toPrisma(bodyFat),

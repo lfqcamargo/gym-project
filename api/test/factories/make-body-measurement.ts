@@ -49,8 +49,9 @@ export class BodyMeasurementFactory {
 
   async makePrismaBodyMeasurement(
     data: Partial<BodyMeasurementProps> = {},
+    id?: UniqueEntityID,
   ): Promise<BodyMeasurement> {
-    const { bodyMeasurement } = makeBodyMeasurement(data)
+    const { bodyMeasurement } = makeBodyMeasurement(data, id)
 
     await this.prisma.bodyMeasurement.create({
       data: PrismaBodyMeasurementMapper.toPrisma(bodyMeasurement),
