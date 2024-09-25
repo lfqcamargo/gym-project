@@ -8,6 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { FileFieldsInterceptor } from '@nestjs/platform-express'
+import { ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
@@ -26,6 +27,7 @@ const bodyValidationPipe = new ZodValidationPipe(bodySchema)
 
 type BodySchema = z.infer<typeof bodySchema>
 
+@ApiTags('users')
 @Controller('/profiles')
 export class EditProfileController {
   constructor(private editprofile: EditProfileUseCase) {}

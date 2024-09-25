@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Param,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { GetBodyMeasurementBySlugUseCase } from '@/domain/users/application/use-cases/get-body-measurement-by-slug'
@@ -12,6 +13,7 @@ import { Public } from '@/infra/auth/public'
 
 import { BodyMeasurementPresenter } from '../presenters/body-measurement-presenter'
 
+@ApiTags('users')
 @Controller('/body-measurement/:slug')
 @Public()
 export class GetBodyMeasurementBySlugController {

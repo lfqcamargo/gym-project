@@ -1,3 +1,4 @@
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 import {
   BadRequestException,
   Body,
@@ -6,6 +7,7 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 import { CreateUserTempUseCase } from '@/domain/users/application/use-cases/create-user-temp'
@@ -13,14 +15,17 @@ import { AlreadyExistsEmailError } from '@/domain/users/application/use-cases/er
 import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
+extendZodWithOpenApi(z)
+
 const bodySchema = z.object({
-  email: z.string().email(),
+  email: z.string().email().openapi({ description: 'teste' }),
   name: z.string(),
   password: z.string(),
 })
 
 type BodySchema = z.infer<typeof bodySchema>
 
+@ApiTags('sessions')
 @Controller('/users')
 @Public()
 export class CreateUserTempController {

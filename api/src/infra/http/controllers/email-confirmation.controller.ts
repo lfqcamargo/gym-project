@@ -6,12 +6,14 @@ import {
   NotFoundException,
   Param,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { EmailConfirmationUseCase } from '@/domain/users/application/use-cases/email-confirmation'
 import { TokenExpiredError } from '@/domain/users/application/use-cases/errors/token-expired-error'
 import { TokenNotFoundError } from '@/domain/users/application/use-cases/errors/token-not-found-error'
 import { Public } from '@/infra/auth/public'
 
+@ApiTags('Sessions')
 @Controller('/confirmation/:token')
 @Public()
 export class EmailConfirmationController {

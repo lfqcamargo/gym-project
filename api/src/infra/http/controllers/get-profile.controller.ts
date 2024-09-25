@@ -4,6 +4,7 @@ import {
   Get,
   InternalServerErrorException,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { GetProfileUseCase } from '@/domain/users/application/use-cases/get-profile'
@@ -12,6 +13,7 @@ import { UserPayload } from '@/infra/auth/jwt.strategy'
 
 import { ProfilePresenter } from '../presenters/profile-presenter'
 
+@ApiTags('users')
 @Controller('/profiles')
 export class GetProfileController {
   constructor(private getProfile: GetProfileUseCase) {}

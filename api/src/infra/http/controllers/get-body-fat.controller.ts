@@ -4,6 +4,7 @@ import {
   Get,
   InternalServerErrorException,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { GetBodyFatUseCase } from '@/domain/users/application/use-cases/get-body-fat'
@@ -12,6 +13,7 @@ import { UserPayload } from '@/infra/auth/jwt.strategy'
 
 import { BodyFatPresenter } from '../presenters/body-fat-presenter'
 
+@ApiTags('users')
 @Controller('/body-fat')
 export class GetBodyFatController {
   constructor(private getBodyFat: GetBodyFatUseCase) {}

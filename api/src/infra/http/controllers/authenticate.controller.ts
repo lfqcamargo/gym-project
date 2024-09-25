@@ -6,6 +6,7 @@ import {
   UnauthorizedException,
   UsePipes,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 import { AuthenticateUserUseCase } from '@/domain/users/application/use-cases/authenticate-user'
@@ -20,6 +21,7 @@ const authenticateBodySchema = z.object({
 
 type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
+@ApiTags('Sessions')
 @Controller('/sessions')
 @Public()
 export class AuthenticateController {

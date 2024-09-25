@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Param,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { GetBodyFatBySlugUseCase } from '@/domain/users/application/use-cases/get-body-fat-by-slug'
@@ -12,6 +13,7 @@ import { Public } from '@/infra/auth/public'
 
 import { BodyFatPresenter } from '../presenters/body-fat-presenter'
 
+@ApiTags('users')
 @Controller('/body-fat/:slug')
 @Public()
 export class GetBodyFatBySlugController {

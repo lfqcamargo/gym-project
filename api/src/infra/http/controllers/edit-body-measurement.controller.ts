@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Put,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { z } from 'zod'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
@@ -37,6 +38,7 @@ const bodySchema = z.object({
 
 type BodySchema = z.infer<typeof bodySchema>
 
+@ApiTags('users')
 @Controller('/body-measurements')
 export class EditBodyMeasurementController {
   constructor(private editBodyMeasurementUseCase: EditBodyMeasurementUseCase) {}

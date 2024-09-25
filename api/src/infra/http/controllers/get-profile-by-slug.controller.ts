@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Param,
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { GetProfileBySlugUseCase } from '@/domain/users/application/use-cases/get-profile-by-slug'
@@ -12,6 +13,7 @@ import { Public } from '@/infra/auth/public'
 
 import { ProfilePresenter } from '../presenters/profile-presenter'
 
+@ApiTags('users')
 @Controller('/profiles/:slug')
 @Public()
 export class GetProfileBySlugController {
