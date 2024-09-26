@@ -1,4 +1,3 @@
-import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
 import {
   BadRequestException,
   Body,
@@ -7,34 +6,43 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
-import { z } from 'zod'
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 
 import { CreateUserTempUseCase } from '@/domain/users/application/use-cases/create-user-temp'
 import { AlreadyExistsEmailError } from '@/domain/users/application/use-cases/errors/already-exists-email-error'
 import { Public } from '@/infra/auth/public'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
-extendZodWithOpenApi(z)
+import {
+  bodyCreateUserSchema,
+  BodyCreateUserSchemaDto,
+} from './dtos/create-user-temp.dto'
 
-const bodySchema = z.object({
-  email: z.string().email().openapi({ description: 'teste' }),
-  name: z.string(),
-  password: z.string(),
-})
-
-type BodySchema = z.infer<typeof bodySchema>
-
-@ApiTags('sessions')
+@ApiTags('users')
 @Controller('/users')
 @Public()
 export class CreateUserTempController {
   constructor(private createUserTemp: CreateUserTempUseCase) {}
 
   @Post()
-  @UsePipes(new ZodValidationPipe(bodySchema))
-  async handle(@Body() body: BodySchema) {
-    const { email, name, password } = await bodySchema.parseAsync(body)
+  @ApiOperation({ summary: 'Create a temporary user' })
+  @ApiResponse({
+    status: 201,
+    description: 'Temporary user created successfully',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Email already exists',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data',
+  })
+  @UsePipes(new ZodValidationPipe(bodyCreateUserSchema))
+  async handle(@Body() body: BodyCreateUserSchemaDto) {
+    console.log(body)
+    const { email, name, password } =
+      await bodyCreateUserSchema.parseAsync(body)
 
     const result = await this.createUserTemp.execute({
       name,

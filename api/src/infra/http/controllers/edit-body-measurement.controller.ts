@@ -5,8 +5,12 @@ import {
   InternalServerErrorException,
   Put,
 } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
-import { z } from 'zod'
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditBodyMeasurementUseCase } from '@/domain/users/application/use-cases/edit-body-measurement'
@@ -14,38 +18,34 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
-const bodySchema = z.object({
-  leftRelaxedArm: z.number(),
-  rightRelaxedArm: z.number(),
-  leftContractedArm: z.number(),
-  rightContractedArm: z.number(),
-  leftForearm: z.number(),
-  rightForearm: z.number(),
-  leftThigh: z.number(),
-  rightThigh: z.number(),
-  leftCalf: z.number(),
-  rightCalf: z.number(),
-  relaxedChest: z.number(),
-  inspiredChest: z.number(),
-  waist: z.number(),
-  abdomen: z.number(),
-  hip: z.number(),
-  neck: z.number(),
-  shoulder: z.number(),
-  upperSkinfolds: z.number(),
-  lowerSkinfolds: z.number(),
-})
-
-type BodySchema = z.infer<typeof bodySchema>
+import {
+  EditBodyMeasurementDto,
+  editBodyMeasurementSchema,
+} from './dtos/edit-body-measurement.dto'
 
 @ApiTags('users')
+@ApiBearerAuth()
 @Controller('/body-measurements')
 export class EditBodyMeasurementController {
   constructor(private editBodyMeasurementUseCase: EditBodyMeasurementUseCase) {}
 
   @Put()
+  @ApiOperation({ summary: 'Edit body measurements' })
+  @ApiResponse({
+    status: 200,
+    description: 'Body measurements updated successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data or user not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async handle(
-    @Body(new ZodValidationPipe(bodySchema)) body: BodySchema,
+    @Body(new ZodValidationPipe(editBodyMeasurementSchema))
+    body: EditBodyMeasurementDto,
     @CurrentUser() user: UserPayload,
   ) {
     const id = user.sub

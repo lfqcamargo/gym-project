@@ -5,8 +5,12 @@ import {
   InternalServerErrorException,
   Patch,
 } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
-import { z } from 'zod'
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditUserUseCase } from '@/domain/users/application/use-cases/edit-user'
@@ -14,22 +18,31 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
-const bodySchema = z.object({
-  name: z.string().optional(),
-  password: z.string().optional(),
-})
-
-type BodySchema = z.infer<typeof bodySchema>
+import { EditUserDto, editUserSchema } from './dtos/edit-user.dto'
 
 @ApiTags('users')
+@ApiBearerAuth()
 @Controller('/users')
 export class EditUserController {
   constructor(private editUser: EditUserUseCase) {}
 
   @Patch()
+  @ApiOperation({ summary: 'Edit user information' })
+  @ApiResponse({
+    status: 200,
+    description: 'User information updated successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data or user not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   async handle(
-    @Body(new ZodValidationPipe(bodySchema))
-    body: BodySchema,
+    @Body(new ZodValidationPipe(editUserSchema))
+    body: EditUserDto,
     @CurrentUser() user: UserPayload,
   ) {
     const { name, password } = body

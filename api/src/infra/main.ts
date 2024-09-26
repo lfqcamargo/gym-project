@@ -16,6 +16,7 @@ async function bootstrap() {
   const allowedOrigins = [
     'http://localhost:3000', // Adicione aqui suas origens de front-end
     'http://localhost:5173',
+    'http://localhost:3333',
     // Adicione outras origens conforme necessário
   ]
 

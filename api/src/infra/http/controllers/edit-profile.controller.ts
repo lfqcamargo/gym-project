@@ -8,8 +8,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { FileFieldsInterceptor } from '@nestjs/platform-express'
-import { ApiTags } from '@nestjs/swagger'
-import { z } from 'zod'
+import {
+  ApiBearerAuth,
+  ApiConsumes,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EditProfileUseCase } from '@/domain/users/application/use-cases/edit-profile'
@@ -17,22 +22,31 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 
-const bodySchema = z.object({
-  description: z.string().optional(),
-  profilePhoto: z.instanceof(Buffer).optional(),
-  coverPhoto: z.instanceof(Buffer).optional(),
-})
+import { EditProfileDto, editProfileSchema } from './dtos/edit-profile.dto'
 
-const bodyValidationPipe = new ZodValidationPipe(bodySchema)
-
-type BodySchema = z.infer<typeof bodySchema>
+const bodyValidationPipe = new ZodValidationPipe(editProfileSchema)
 
 @ApiTags('users')
+@ApiBearerAuth()
 @Controller('/profiles')
 export class EditProfileController {
   constructor(private editprofile: EditProfileUseCase) {}
 
   @Patch()
+  @ApiOperation({ summary: 'Edit user profile' })
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({
+    status: 200,
+    description: 'Profile updated successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request - Invalid input data or profile not found',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   @UseInterceptors(
     FileFieldsInterceptor([
       { name: 'profilePhoto', maxCount: 1 },
@@ -40,7 +54,7 @@ export class EditProfileController {
     ]),
   )
   async handle(
-    @Body(bodyValidationPipe) body: BodySchema,
+    @Body(bodyValidationPipe) body: EditProfileDto,
     @UploadedFiles()
     files: {
       profilePhoto?: Express.Multer.File[]
