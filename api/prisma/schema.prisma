@@ -96,3 +96,34 @@ model BodyFat {
 
   @@map("body_fat")
 }
+
+model MuscleGroup {
+  id          Int    @id @default(autoincrement())
+  description String @unique
+
+  exerciseXMuscleGroups ExerciseMuscleGroups[]
+
+  @@map("muscle_groups")
+}
+
+model Exercise {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+
+  exerciseXMuscleGroups ExerciseMuscleGroups[]
+
+  @@map("exercises")
+}
+
+model ExerciseMuscleGroups {
+  id               Int @id @default(autoincrement())
+  exerciseId       Int @map("exercise_id")
+  muscleGroupId    Int @map("muscle_group_id")
+  muscleActivation Int @map("muscle_activation")
+
+  exercise_id      Exercise    @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  muscle_groups_id MuscleGroup @relation(fields: [muscleGroupId], references: [id], onDelete: Cascade)
+
+  @@map("exercises_x_muscle_groups")
+}
