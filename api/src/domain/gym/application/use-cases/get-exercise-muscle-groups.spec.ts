@@ -3,7 +3,7 @@ import { InMemoryExerciseMuscleGroupsRepository } from 'test/repositories/in-mem
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 
 import { ExerciseMuscleGroups } from '../../enterprise/entities/exercise-muscle-groups'
-import { FetchExerciseMuscleGroupsUseCase } from './fetch-exercise-muscle-groups'
+import { FetchExerciseMuscleGroupsUseCase } from './get-exercise-muscle-groups'
 
 let inMemoryExerciseMuscleGroupsRepository: InMemoryExerciseMuscleGroupsRepository
 let sut: FetchExerciseMuscleGroupsUseCase
@@ -26,25 +26,18 @@ describe('Fetch ExerciseMuscleGroups Use Case', () => {
     })
 
     inMemoryExerciseMuscleGroupsRepository.items[1] = new ExerciseMuscleGroups({
-      id: 1,
+      id: 2,
       exerciseId: 1,
       muscleGroupId: 2,
       muscleActivation: 2,
     })
 
-    inMemoryExerciseMuscleGroupsRepository.items[2] = new ExerciseMuscleGroups({
-      id: 1,
-      exerciseId: 2,
-      muscleGroupId: 1,
-      muscleActivation: 1,
-    })
-
     const result = await sut.execute({ id: 1 })
 
     expect(result.isRight()).toBe(true)
-    if (result.isRight()) {
-      expect(result.value.exerciseMuscleGroups).toHaveLength(3)
-    }
+    expect(result.value).toEqual({
+      exerciseMuscleGroups: inMemoryExerciseMuscleGroupsRepository.items[0],
+    })
   })
 
   it('should return a ResourceNotFoundError if exercise muscle groups does not exist', async () => {

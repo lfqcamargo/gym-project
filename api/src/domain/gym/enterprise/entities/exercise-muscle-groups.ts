@@ -27,4 +27,12 @@ export class ExerciseMuscleGroups {
   get muscleActivation() {
     return this.props.muscleActivation
   }
+
+  static create(props: ExerciseMuscleGroupsProps) {
+    const exerciseMuscleGroups = new ExerciseMuscleGroups({
+      ...props,
+    })
+
+    return exerciseMuscleGroups
+  }
 }

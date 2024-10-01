@@ -22,4 +22,12 @@ export class Exercise {
   get description() {
     return this.props.description
   }
+
+  static create(props: ExerciseProps) {
+    const exercise = new Exercise({
+      ...props,
+    })
+
+    return exercise
+  }
 }

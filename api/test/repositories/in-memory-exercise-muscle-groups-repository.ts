@@ -7,9 +7,9 @@ export class InMemoryExerciseMuscleGroupsRepository
   public items: ExerciseMuscleGroups[] = []
 
   async findById(id: number) {
-    const exerciseMuscleGroups = this.items.filter((item) => item.id === id)
+    const exerciseMuscleGroups = this.items.find((item) => item.id === id)
 
-    if (exerciseMuscleGroups.length === 0) {
+    if (!exerciseMuscleGroups) {
       return null
     }
 

@@ -6,26 +6,26 @@ import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { ExerciseMuscleGroups } from '../../enterprise/entities/exercise-muscle-groups'
 import { ExerciseMuscleGroupsRepository } from '../repositories/exercise-muscle-groups-repository'
 
-interface FetchExerciseMuscleGroupsUseCaseRequest {
+interface GetExerciseMuscleGroupsUseCaseRequest {
   id: number
 }
 
-type FetchExerciseMuscleGroupsUseCaseResponse = Either<
+type GetExerciseMuscleGroupsUseCaseResponse = Either<
   ResourceNotFoundError,
   {
-    exerciseMuscleGroups: ExerciseMuscleGroups[]
+    exerciseMuscleGroups: ExerciseMuscleGroups
   }
 >
 
 @Injectable()
-export class FetchExerciseMuscleGroupsUseCase {
+export class GetExerciseMuscleGroupsUseCase {
   constructor(
     private exerciseMuscleGroupsRepository: ExerciseMuscleGroupsRepository,
   ) {}
 
   async execute({
     id,
-  }: FetchExerciseMuscleGroupsUseCaseRequest): Promise<FetchExerciseMuscleGroupsUseCaseResponse> {
+  }: GetExerciseMuscleGroupsUseCaseRequest): Promise<GetExerciseMuscleGroupsUseCaseResponse> {
     const exerciseMuscleGroups =
       await this.exerciseMuscleGroupsRepository.findById(id)
 

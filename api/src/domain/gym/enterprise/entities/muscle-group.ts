@@ -17,4 +17,12 @@ export class MuscleGroup {
   get description() {
     return this.props.description
   }
+
+  static create(props: MuscleGroupProps) {
+    const musclegroup = new MuscleGroup({
+      ...props,
+    })
+
+    return musclegroup
+  }
 }

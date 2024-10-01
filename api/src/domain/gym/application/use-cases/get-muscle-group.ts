@@ -13,7 +13,7 @@ interface GetMuscleGroupUseCaseRequest {
 type GetMuscleGroupUseCaseResponse = Either<
   ResourceNotFoundError,
   {
-    musclegroup: MuscleGroup
+    muscleGroup: MuscleGroup
   }
 >
 
@@ -24,12 +24,12 @@ export class GetMuscleGroupUseCase {
   async execute({
     id,
   }: GetMuscleGroupUseCaseRequest): Promise<GetMuscleGroupUseCaseResponse> {
-    const musclegroup = await this.musclegroupRepository.findById(id)
+    const muscleGroup = await this.musclegroupRepository.findById(id)
 
-    if (!musclegroup) {
+    if (!muscleGroup) {
       return left(new ResourceNotFoundError())
     }
 
-    return right({ musclegroup })
+    return right({ muscleGroup })
   }
 }

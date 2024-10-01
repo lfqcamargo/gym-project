@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common'
 
+import { GetExerciseUseCase } from '@/domain/gym/application/use-cases/get-exercise'
+import { GetExerciseMuscleGroupsUseCase } from '@/domain/gym/application/use-cases/get-exercise-muscle-groups'
+import { GetMuscleGroupUseCase } from '@/domain/gym/application/use-cases/get-muscle-group'
 import { AuthenticateUserUseCase } from '@/domain/users/application/use-cases/authenticate-user'
 import { CreateUserUseCase } from '@/domain/users/application/use-cases/create-user'
 import { CreateUserTempUseCase } from '@/domain/users/application/use-cases/create-user-temp'
@@ -28,6 +31,9 @@ import { GetBodyFatController } from './controllers/get-body-fat.controller'
 import { GetBodyFatBySlugController } from './controllers/get-body-fat-by-slug.controller'
 import { GetBodyMeasurementController } from './controllers/get-body-measurement.controller'
 import { GetBodyMeasurementBySlugController } from './controllers/get-body-measurement-by-slug.controller'
+import { GetExerciseController } from './controllers/get-exercise.controller'
+import { GetExerciseMuscleGroupsController } from './controllers/get-exercise-muscle-groups.controller'
+import { GetMuscleGroupController } from './controllers/get-muscle-group.controller'
 import { GetProfileController } from './controllers/get-profile.controller'
 import { GetProfileBySlugController } from './controllers/get-profile-by-slug.controller'
 
@@ -47,6 +53,9 @@ import { GetProfileBySlugController } from './controllers/get-profile-by-slug.co
     GetBodyMeasurementBySlugController,
     GetBodyFatController,
     GetBodyFatBySlugController,
+    GetExerciseController,
+    GetMuscleGroupController,
+    GetExerciseMuscleGroupsController,
   ],
   providers: [
     AuthenticateUserUseCase,
@@ -63,6 +72,9 @@ import { GetProfileBySlugController } from './controllers/get-profile-by-slug.co
     GetBodyMeasurementBySlugUseCase,
     GetBodyFatUseCase,
     GetBodyFatBySlugUseCase,
+    GetExerciseUseCase,
+    GetMuscleGroupUseCase,
+    GetExerciseMuscleGroupsUseCase,
   ],
 })
 export class HttpModule {}
