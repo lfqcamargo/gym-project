@@ -21,7 +21,7 @@ const idValidationPipe = new ZodValidationPipe(idSchema)
 
 type IdSchema = z.infer<typeof idSchema>
 
-@ApiTags('exercise-muscle-groups')
+@ApiTags('exercises')
 @Public()
 @Controller('/exercise-muscle-groups/:id')
 export class GetExerciseMuscleGroupsController {
