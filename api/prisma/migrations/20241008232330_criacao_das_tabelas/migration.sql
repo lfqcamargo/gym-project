@@ -77,6 +77,33 @@ CREATE TABLE "body_fat" (
     CONSTRAINT "body_fat_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "muscle_groups" (
+    "id" SERIAL NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "muscle_groups_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exercises" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "exercises_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exercises_x_muscle_groups" (
+    "id" SERIAL NOT NULL,
+    "exercise_id" INTEGER NOT NULL,
+    "muscle_group_id" INTEGER NOT NULL,
+    "muscle_activation" INTEGER NOT NULL,
+
+    CONSTRAINT "exercises_x_muscle_groups_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_temp_email_key" ON "users_temp"("email");
 
@@ -86,6 +113,12 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "users_slug_key" ON "users"("slug");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "muscle_groups_description_key" ON "muscle_groups"("description");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "exercises_name_key" ON "exercises"("name");
+
 -- AddForeignKey
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -94,3 +127,9 @@ ALTER TABLE "body_measurements" ADD CONSTRAINT "body_measurements_id_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "body_fat" ADD CONSTRAINT "body_fat_id_fkey" FOREIGN KEY ("id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exercises_x_muscle_groups" ADD CONSTRAINT "exercises_x_muscle_groups_exercise_id_fkey" FOREIGN KEY ("exercise_id") REFERENCES "exercises"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exercises_x_muscle_groups" ADD CONSTRAINT "exercises_x_muscle_groups_muscle_group_id_fkey" FOREIGN KEY ("muscle_group_id") REFERENCES "muscle_groups"("id") ON DELETE CASCADE ON UPDATE CASCADE;
